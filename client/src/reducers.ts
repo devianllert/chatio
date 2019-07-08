@@ -1,10 +1,8 @@
 import { combineReducers, Reducer } from 'redux';
 
-import globalReducer from './containers/App/reducer';
 import chatReducer from './containers/Chat/reducer';
 
 const staticReducers: object = {
-  global: globalReducer,
   chat: chatReducer,
 };
 

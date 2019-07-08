@@ -1,13 +1,13 @@
 export interface Message {
+  id: string;
   author: string;
   message: string;
+  createdAt: Date;
 }
 
 export interface ChatState {
   messages: Message[];
 }
-
-export type ChatAction = AddMessage | LoadMessages | LoadMessagesSuccess | LoadMessagesError;
 
 export interface AddMessage {
   type: 'ADD_MESSAGE';
@@ -27,3 +27,5 @@ export interface LoadMessagesError {
   type: 'LOAD_MESSAGES_ERROR';
   payload: Error;
 }
+
+export type ChatAction = AddMessage | LoadMessages | LoadMessagesSuccess | LoadMessagesError;
