@@ -1,23 +1,17 @@
 import React, { ReactElement } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
+import Chat from '../Chat';
+import NotFound from '../NotFound';
+
+import style from '../../design/common.module.scss';
 
 const App = (): ReactElement => (
   <>
-    <header>
-      <div>Header</div>
-
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/contact">Contact</Link>
-      </div>
-    </header>
-    <main>
+    <main className={style.container}>
       <Switch>
-        <Route exact path="/" component={(): ReactElement => <h1>Home</h1>} />
-        <Route path="/about" component={(): ReactElement => <h1>About</h1>} />
-        <Route path="/contact" component={(): ReactElement => <h1>Contact</h1>} />
-        <Route component={(): ReactElement => <h1>Not Found</h1>} />
+        <Route exact path="/" component={Chat} />
+        <Route component={NotFound} />
       </Switch>
     </main>
   </>

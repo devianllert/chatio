@@ -1,11 +1,11 @@
 import { combineReducers, Reducer } from 'redux';
 
 import globalReducer from './containers/App/reducer';
-import TrackerReducer from './containers/Tracker/reducer';
+import chatReducer from './containers/Chat/reducer';
 
 const staticReducers: object = {
   global: globalReducer,
-  tracker: TrackerReducer,
+  chat: chatReducer,
 };
 
 const createReducer = (injectedReducers = {}): Reducer => {
