@@ -1,5 +1,5 @@
 {
-  "name": "timetracker",
+  "name": "chat-client",
   "version": "0.0.0",
   "dependencies": {
     "classnames": "^2.2.6",
