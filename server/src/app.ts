@@ -30,7 +30,7 @@ io.on('connection', (socket): void => {
   socket.on(
     'disconnect',
     (): void => {
-      console.log('user disconnected');
+      console.log('User disconnected');
     },
   );
 

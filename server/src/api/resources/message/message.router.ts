@@ -1,17 +1,17 @@
 import { Router } from 'express';
 
-import * as messagesController from './message.controller';
+import * as messageController from './message.controller';
 
 const router = Router();
 
-// @route   GET api/messages
+// @route   GET api/v1/messages
 // @desc    Get Messages
 // @access  Public
-router.get('/', messagesController.getAllMessages);
+router.get('/', messageController.getAllMessages);
 
-// @route   POST api/messages
+// @route   POST api/v1/messages
 // @desc    Create Message
-// @access  Private
-router.post('/', messagesController.createMessage);
+// @access  Public
+router.post('/', messageController.createMessage);
 
 export default router;
