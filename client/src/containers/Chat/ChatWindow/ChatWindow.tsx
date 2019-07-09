@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { useLayoutEffect, ReactElement } from 'react';
 
 import ChatMessage from '../ChatMessage';
 
@@ -8,14 +8,22 @@ interface Props {
   messages: import('../types').Message[];
 }
 
-const ChatWindow = ({ messages }: Props): ReactElement => (
-  <div className={style.window}>
-    {messages.map(
-      (message): ReactElement => (
-        <ChatMessage key={message.id} {...message} />
-      ),
-    )}
-  </div>
-);
+const ChatWindow = ({ messages }: Props): ReactElement => {
+  let chatWindow: HTMLDivElement;
+
+  useLayoutEffect((): void => {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }, [messages]);
+
+  return (
+    <div className={style.window} ref={(el: HTMLDivElement): void => { chatWindow = el; }}>
+      {messages.map(
+        (message): ReactElement => (
+          <ChatMessage key={message.id} {...message} />
+        ),
+      )}
+    </div>
+  );
+};
 
 export default ChatWindow;
