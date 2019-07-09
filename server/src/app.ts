@@ -1,12 +1,11 @@
 import http from 'http';
 import express, { Application } from 'express';
-import socketIO from 'socket.io';
 import dotenv from 'dotenv';
 
 import { connectDB } from './config/db';
-import router from './api/router';
+import socketConnect from './socket';
 
-import Message from './api/resources/message/message.model';
+import router from './api/router';
 
 dotenv.config();
 
@@ -22,39 +21,7 @@ app.set('env', process.env.NODE_ENV);
 
 const server = http.createServer(app);
 
-const io = socketIO(server);
-
-io.on('connection', (socket): void => {
-  console.log('User connected');
-
-  socket.on(
-    'disconnect',
-    (): void => {
-      console.log('User disconnected');
-    },
-  );
-
-  socket.on(
-    'ADD_MESSAGE',
-    async (text: string): Promise<void> => {
-      const message = await Message.create({
-        author: 'Anonyomus',
-        message: text,
-      });
-
-      io.emit('ADD_MESSAGE', message);
-    },
-  );
-
-  socket.on(
-    'LOAD_MESSAGES',
-    async (): Promise<void> => {
-      const message = await Message.findAll();
-
-      io.emit('LOAD_MESSAGES', message);
-    },
-  );
-});
+socketConnect(server);
 
 server.listen(
   app.get('port'),

@@ -1,25 +1,43 @@
-import { Socket } from 'socket.io';
+import socketIO from 'socket.io';
 
-// import messageController from './api/resources/message/message.controller';
+import Message from './api/resources/message/message.model';
 
-const connection = (socket: Socket): Socket => {
-  console.log('User connected');
+const socketConnect = (server: import('http').Server): socketIO.Server => {
+  const io = socketIO(server);
 
-  socket.on(
-    'disconnect',
-    (): void => {
-      console.log('user disconnected');
-    },
-  );
+  io.on('connection', (socket): void => {
+    console.log('User connected');
 
-  socket.on(
-    'ADD_MESSAGE',
-    (message: string): void => {
-      console.log(message);
-    },
-  );
+    socket.on(
+      'disconnect',
+      (): void => {
+        console.log('User disconnected');
+      },
+    );
 
-  return socket;
+    socket.on(
+      'ADD_MESSAGE',
+      async (text: string): Promise<void> => {
+        const message = await Message.create({
+          author: 'Anonyomus',
+          message: text,
+        });
+
+        io.emit('ADD_MESSAGE', message);
+      },
+    );
+
+    socket.on(
+      'LOAD_MESSAGES',
+      async (): Promise<void> => {
+        const message = await Message.findAll();
+
+        io.emit('LOAD_MESSAGES', message);
+      },
+    );
+  });
+
+  return io;
 };
 
-export default connection;
+export default socketConnect;
