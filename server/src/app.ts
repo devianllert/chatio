@@ -6,6 +6,8 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 import router from './api/router';
 
+import Message from './api/resources/message/message.model';
+
 dotenv.config();
 
 const app: Application = express();
@@ -25,9 +27,33 @@ const io = socketIO(server);
 io.on('connection', (socket): void => {
   console.log('User connected');
 
-  socket.on('ADD_MESSAGE', (): void => {
-    console.log('add message');
-  });
+  socket.on(
+    'disconnect',
+    (): void => {
+      console.log('user disconnected');
+    },
+  );
+
+  socket.on(
+    'ADD_MESSAGE',
+    async (text: string): Promise<void> => {
+      const message = await Message.create({
+        author: 'Anonyomus',
+        message: text,
+      });
+
+      io.emit('ADD_MESSAGE', message);
+    },
+  );
+
+  socket.on(
+    'LOAD_MESSAGES',
+    async (): Promise<void> => {
+      const message = await Message.findAll();
+
+      io.emit('LOAD_MESSAGES', message);
+    },
+  );
 });
 
 server.listen(

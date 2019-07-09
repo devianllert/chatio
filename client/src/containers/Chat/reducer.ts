@@ -8,14 +8,7 @@ import {
 } from './constants';
 
 export const initialState: ChatState = {
-  messages: [
-    {
-      id: '1',
-      author: 'Ruslan',
-      message: '123123',
-      createdAt: new Date(),
-    },
-  ],
+  messages: [],
 };
 
 const chatReducer: Reducer<ChatState, ChatAction> = (state = initialState, action): ChatState => {
@@ -28,6 +21,7 @@ const chatReducer: Reducer<ChatState, ChatAction> = (state = initialState, actio
     case LOAD_MESSAGES:
       return {
         ...state,
+        messages: [...state.messages, ...action.payload],
       };
     case LOAD_MESSAGES_SUCCESS:
       return {
