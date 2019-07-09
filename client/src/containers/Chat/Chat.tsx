@@ -1,15 +1,15 @@
 import React, { useEffect, ReactElement } from 'react';
 import { connect } from 'react-redux';
 
+import { addMessage, loadMessages } from './actions';
+
+import socket from '../../utils/socket';
+
 import { Message } from './types';
 import { AppState } from '../../types';
 
-import { addMessage, loadMessages } from './actions';
-
 import ChatWindow from './ChatWindow';
 import ChatPanel from './ChatPanel';
-
-import socket from '../../utils/socket';
 
 import style from './chat.module.scss';
 
@@ -19,11 +19,11 @@ interface Props {
   loadMessages: Function;
 }
 
-/* eslint-disable */
-
+/* eslint-disable no-shadow */
 const Chat = ({ messages, addMessage, loadMessages }: Props): ReactElement => {
-
   useEffect((): void => {
+    socket.open();
+
     socket.on('LOAD_MESSAGES', (messages: Message[]): void => loadMessages(messages));
     socket.on('ADD_MESSAGE', (message: Message): void => addMessage(message));
 
@@ -31,6 +31,8 @@ const Chat = ({ messages, addMessage, loadMessages }: Props): ReactElement => {
 
     // @ts-ignore
     return (): void => {
+      socket.close();
+
       socket.off('LOAD_MESSAGES');
       socket.off('ADD_MESSAGE');
     };
@@ -53,8 +55,8 @@ const mapStateToProps = (state: AppState): any => ({
 });
 
 const mapDispatchToProps = {
-  addMessage: addMessage,
-  loadMessages: loadMessages,
+  addMessage,
+  loadMessages,
 };
 
 export default connect(

@@ -13,8 +13,7 @@ import * as serviceWorker from './serviceWorker';
 
 import './design/global.scss';
 
-const initialState = {};
-const store = configureStore(initialState);
+const store = configureStore();
 const MOUNT_NODE = document.getElementById('app');
 
 ReactDOM.render(
