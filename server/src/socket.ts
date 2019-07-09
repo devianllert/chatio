@@ -30,9 +30,9 @@ const socketConnect = (server: import('http').Server): socketIO.Server => {
     socket.on(
       'LOAD_MESSAGES',
       async (): Promise<void> => {
-        const message = await Message.findAll();
+        const messages = await Message.findAll();
 
-        io.emit('LOAD_MESSAGES', message);
+        io.emit('LOAD_MESSAGES', messages);
       },
     );
   });
