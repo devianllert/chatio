@@ -5,7 +5,7 @@ import style from './message.module.scss';
 
 type Props = import('../types').Message;
 
-const ChatMessage = ({ author, message }: Props): ReactElement => (
+const ChatMessage = ({ author = 'Anonymous', message }: Props): ReactElement => (
   <div className={classnames(style.message, style.in)}>
     <div className={style.author}>{author}</div>
 
