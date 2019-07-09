@@ -31,10 +31,10 @@ const Chat = ({ messages, addMessage, loadMessages }: Props): ReactElement => {
 
     // @ts-ignore
     return (): void => {
-      socket.close();
-
       socket.off('LOAD_MESSAGES');
       socket.off('ADD_MESSAGE');
+
+      socket.close();
     };
   }, []);
 
