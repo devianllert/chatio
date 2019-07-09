@@ -5,8 +5,8 @@
   "main": "src/app.ts",
   "scripts": {
     "prod": "npm run build && npm run start",
-    "start": "cross-env NODE_ENV=production node dist/app.js",
-    "build": "npm run clean && tsc && npm run lint:fix",
+    "start": "cross-env NODE_ENV=production node ./dist/app.js",
+    "build": "npm run clean && tsc -b",
     "dev": "ts-node-dev --respawn --no-notify src/app.ts",
     "clean": "rimraf dist",
     "lint": "eslint --ext .ts .",
@@ -14,7 +14,6 @@
     "test": "jest --forceExit --coverage --verbose"
   },
   "dependencies": {
-    "@types/socket.io": "^2.1.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -36,6 +35,8 @@
     "@types/mongodb": "^3.1.28",
     "@types/mongoose": "^5.5.7",
     "@types/node": "^12.0.10",
+    "@types/sequelize": "^4.28.3",
+    "@types/socket.io": "^2.1.2",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
