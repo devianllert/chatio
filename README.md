@@ -7,22 +7,22 @@ A project that runs a Node server and a create-react-app app via two separate co
 ### Server
 
 ```
+cd server
 npm install
 ```
 
 ```
-cd server
 npm run dev 
 ```
 
 ### Client
 
 ```
+cd client
 npm install
 ```
 
 ```
-cd client
 npm start
 ```
 
