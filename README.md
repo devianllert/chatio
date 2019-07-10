@@ -11,7 +11,8 @@ npm install
 ```
 
 ```
-cd server && npm run dev 
+cd server
+npm run dev 
 ```
 
 ### Client
@@ -21,11 +22,13 @@ npm install
 ```
 
 ```
-cd client && npm run dev 
+cd client
+npm start
 ```
 
 ## Production
 
 ```
+docker-compose build
 docker-compose up
 ```
