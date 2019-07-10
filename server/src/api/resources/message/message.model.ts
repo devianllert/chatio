@@ -3,7 +3,7 @@ import {
   BuildOptions,
   STRING,
 } from 'sequelize';
-import { db } from '../../../config/db';
+import { db } from '../../../db';
 
 interface Message extends Model {
   author: string;

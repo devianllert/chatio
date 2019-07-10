@@ -2,7 +2,7 @@ import http from 'http';
 import express, { Application } from 'express';
 import dotenv from 'dotenv';
 
-import { connectDB } from './config/db';
+import { connectDB } from './db';
 import socketConnect from './socket';
 
 import router from './api/router';

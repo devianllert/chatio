@@ -50,6 +50,7 @@ const Chat = ({ messages, addMessage, loadMessages }: Props): ReactElement => {
   );
 };
 
+/* eslint-disable-next-line */
 const mapStateToProps = (state: AppState): any => ({
   messages: state.chat.messages,
 });
